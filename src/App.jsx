@@ -11,11 +11,14 @@ import './App.css'
 //   )
 
 // }
-
-const Counter = ({message}) => {
+const ShoppingList = ({ listItem }) => {
   return (
     <div>
-      <h1>{message}</h1>
+      {listItem.map((item, index) => (
+        <div key={index}>
+          <li>{item}</li>
+        </div>
+      ))}
     </div>
   );
 }
@@ -23,33 +26,25 @@ const Counter = ({message}) => {
 
 
 function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [itemList, setItemList] = useState([]);
 
-  const [message, setMessage] = useState("");
-  const [inputvalue, setInputValue] = useState("");
-
-  const handleMessageChange = (event) => {
+  const handleItemChange = (event) => {
     setInputValue(event.target.value);
   }
 
-  const handleSetMessage = () => {
-    setMessage(inputvalue);
+  const handleSetItem = () => {
+    setItemList([...itemList, inputValue]);
+    setInputValue(""); // Clear the input field after adding an item
   }
-
-  
-
-
-
-
-  
 
   return (
     <div>
-      <input type="text" placeholder='type message' value={inputvalue} onChange={handleMessageChange} />
-      <button onClick={handleSetMessage}> Add to list </button>
-      <Counter message={message} />
+      <input type="text" placeholder='type message' value={inputValue} onChange={handleItemChange} />
+      <button onClick={handleSetItem}>Add to list</button>
+      <ShoppingList listItem={itemList}/>
     </div>
   );
-  
 }
 
-export default App
+export default App;
