@@ -5,47 +5,50 @@ import './App.css'
 
 // const Name = (props) => {
 
-//   return ( 
-//     <h2> jag heter {props.name} </h2>
+//   return (
+
+//     <h2> Jag heter {props.name}</h2>
 //   )
+
 // }
 
-const Counter = () => {
-
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(count + 1);
-  }
-
-  const decrement = () => {
-    setCount(count - 1);
-  }
-
+const Counter = ({message}) => {
   return (
     <div>
-      <h1>Räknare</h1>
-      <p>Antal: {count}</p>
-      <button onClick={increment}>Öka</button>
-      <button onClick={decrement}>inte öka</button>
+      <h1>{message}</h1>
     </div>
-  )
+  );
 }
 
 
 
 function App() {
+
+  const [message, setMessage] = useState("");
+  const [inputvalue, setInputValue] = useState("");
+
+  const handleMessageChange = (event) => {
+    setInputValue(event.target.value);
+  }
+
+  const handleSetMessage = () => {
+    setMessage(inputvalue);
+  }
+
+  
+
+
+
+
   
 
   return (
     <div>
-      <Counter />
-      <Counter />
-        
+      <input type="text" placeholder='type message' value={inputvalue} onChange={handleMessageChange} />
+      <button onClick={handleSetMessage}> Add to list </button>
+      <Counter message={message} />
     </div>
-
-    
-  )
+  );
   
 }
 
